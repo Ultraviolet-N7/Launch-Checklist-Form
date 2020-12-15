@@ -8,9 +8,11 @@ window.addEventListener("load", function(){
        let cargoMassInput = document.querySelector("input[name=cargoMass]");
        let pilotStatus = document.getElementById("pilotStatus");
        let copilotStatus = document.getElementById("copilotStatus");
+       let fuelStatus = document.getElementById("fuelStatus");
+       let cargoStatus = document.getElementById("cargoStatus");
        let faultyItems = document.getElementById("faultyItems");
-       let submitButton = document.getElementById("formSubmit");
-       
+       let launchStatus = document.getElementById("launchStatus");
+              
         
        if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" ||cargoMassInput.value === ""){
            alert("All fields are required.");
@@ -21,15 +23,42 @@ window.addEventListener("load", function(){
        } else {
         pilotStatus.style.color = "green";
         copilotStatus.style.color = "green";
-        faultyItems.style.visibility = "visible"
-        pilotStatus.innerHTML = `${pilotNameInput.value} is ready.`
-        copilotStatus.innerHTML = `${copilotNameInput.value} is ready.`
+        faultyItems.style.visibility = "visible";
+        pilotStatus.innerHTML = `${pilotNameInput.value} is ready.`;
+        copilotStatus.innerHTML = `${copilotNameInput.value} is ready.`;
         event.preventDefault();
-            //if (fuelLevelInput.value )
-       }
-       
-     
-   });
+            if (fuelLevelInput.value < 10000 && cargoMassInput.value > 10000){
+                launchStatus.style.color = "red";
+                launchStatus.innerHTML = `Shuttle not ready for launch.`;
+                fuelStatus.style.color = "red";
+                cargoStatus.style.color = "red";
+                fuelStatus.innerHTML = `Fuel level must be a minimum of 10,000 liters.`;
+                cargoStatus.innerHTML = `Cargo mass must not exceed 10,000 kilograms.`;
+            
+            }else if (fuelLevelInput.value < 10000){
+                launchStatus.style.color = "red";
+                launchStatus.innerHTML = `Shuttle not ready for launch.`;
+                fuelStatus.style.color = "red";
+                cargoStatus.style.color = "green";
+                fuelStatus.innerHTML = `Fuel level must be a minimum of 10,000 liters.`;
+            }else if (cargoMassInput.value > 10000){
+                launchStatus.style.color = "red";
+                launchStatus.innerHTML = `Shuttle not ready for launch.`;
+                cargoStatus.style.color = "red";
+                fuelStatus.style.colr = "green";
+                cargoStatus.innerHTML = `Cargo mass must not exceed 10,000 kilograms.`;
+                       
+            }else{
+                launchStatus.style.color = "green";
+                launchStatus.innerHTML = `Shuttle is ready for launch!`;
+                fuelStatus.style.color = "green";
+                cargoStatus.style.color = "green";
+                
+            }
+
+            }
+            
+    });
     
 });
 // faultyItems.style.visibility = "visible";
