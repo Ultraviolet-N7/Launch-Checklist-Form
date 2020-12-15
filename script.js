@@ -6,27 +6,37 @@ window.addEventListener("load", function(){
        let copilotNameInput = document.querySelector("input[name=copilotName]");
        let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
        let cargoMassInput = document.querySelector("input[name=cargoMass]");
+       let pilotStatus = document.getElementById("pilotStatus");
+       let copilotStatus = document.getElementById("copilotStatus");
+       let faultyItems = document.getElementById("faultyItems");
+       let submitButton = document.getElementById("formSubmit");
        
-       if (pilotNameInput.value === "" || !isNaN(pilotNameInput.value)){
-           alert("Please enter a valid pilot name.");
+        
+       if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" ||cargoMassInput.value === ""){
+           alert("All fields are required.");
            event.preventDefault();
-       }
-       if (copilotNameInput.value === "" || !isNaN(copilotNameInput.value)){
-           alert("Please enter a valid co-pilot name.");
+       } else if (!isNaN(pilotNameInput.value) || !isNaN(copilotNameInput.value) || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)){
+           alert("Please ensure that all fields contain valid data.");
            event.preventDefault();
-       }
-       if (fuelLevelInput.value === "" || isNaN(fuelLevelInput.value)){
-           alert("Please enter a valid fuel level.");
-           event.preventDefault(); 
-       }
-       if (cargoMassInput.value === "" || isNaN(cargoMassInput.value)){
-           alert("Please enter a valid cargo mass.");
-           event.preventDefault();
+       } else {
+        pilotStatus.style.color = "green";
+        copilotStatus.style.color = "green";
+        faultyItems.style.visibility = "visible"
+        pilotStatus.innerHTML = `${pilotNameInput.value} is ready.`
+        copilotStatus.innerHTML = `${copilotNameInput.value} is ready.`
+        event.preventDefault();
+            //if (fuelLevelInput.value )
        }
        
+     
    });
-   console.log(typeof pilotNameInput.value); 
+    
 });
+// faultyItems.style.visibility = "visible";
+//         pilotStatus.innerHTML = `${pilotNameInput.value} is ready.`
+//         copilotStatus.innerHTML = `${copilotNameInput.value} is ready.`
+//         console.log("This worked.");
+//         event.preventDefault();
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
 <h2>Mission Destination</h2>
 <ol>
