@@ -28,6 +28,7 @@ window.addEventListener("load", function(){
     });
    });
    form.addEventListener("submit", function(event){
+       event.preventDefault();
        let pilotNameInput = document.querySelector("input[name=pilotName]");
        let copilotNameInput = document.querySelector("input[name=copilotName]");
        let fuelLevelInput = document.querySelector("input[name=fuelLevel]");
@@ -42,17 +43,14 @@ window.addEventListener("load", function(){
         
        if (pilotNameInput.value === "" || copilotNameInput.value === "" || fuelLevelInput.value === "" ||cargoMassInput.value === ""){
            alert("All fields are required.");
-           event.preventDefault();
        } else if (!isNaN(pilotNameInput.value) || !isNaN(copilotNameInput.value) || isNaN(fuelLevelInput.value) || isNaN(cargoMassInput.value)){
            alert("Please ensure that all fields contain valid data.");
-           event.preventDefault();
        } else {
         pilotStatus.style.color = "green";
         copilotStatus.style.color = "green";
         faultyItems.style.visibility = "visible";
         pilotStatus.innerHTML = `${pilotNameInput.value} is ready.`;
         copilotStatus.innerHTML = `${copilotNameInput.value} is ready.`;
-        event.preventDefault();
             if (fuelLevelInput.value < 10000 && cargoMassInput.value > 10000){
                 launchStatus.style.color = "red";
                 launchStatus.innerHTML = `Shuttle not ready for launch.`;
@@ -60,7 +58,6 @@ window.addEventListener("load", function(){
                 cargoStatus.style.color = "red";
                 fuelStatus.innerHTML = `Fuel level must be a minimum of 10,000 liters.`;
                 cargoStatus.innerHTML = `Cargo mass must not exceed 10,000 kilograms.`;
-            
             }else if (fuelLevelInput.value < 10000){
                 launchStatus.style.color = "red";
                 launchStatus.innerHTML = `Shuttle not ready for launch.`;
@@ -73,7 +70,6 @@ window.addEventListener("load", function(){
                 cargoStatus.style.color = "red";
                 fuelStatus.style.colr = "green";
                 cargoStatus.innerHTML = `Cargo mass must not exceed 10,000 kilograms.`;
-                       
             }else{
                 launchStatus.style.color = "green";
                 launchStatus.innerHTML = `Shuttle is ready for launch!`;
